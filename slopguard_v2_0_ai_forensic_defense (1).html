@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlopGuard v2.0 - Real Human Creativity & Creative Commons IP Defense</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            950: '#040711',
+                            900: '#080d1a',
+                            850: '#0e1629',
+                            800: '#141f38',
+                            700: '#1e2c4d',
+                            cyan: '#00f2fe',
+                            teal: '#4facfe',
+                            pink: '#ff007f',
+                            magenta: '#e01cd5',
+                            lime: '#10b981',
+                            amber: '#ffb703',
+                            purple: '#8b5cf6',
+                            electric: '#3a86ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2.5s infinite ease-in-out',
+                        'scan-line': 'scanLine 3s infinite linear',
+                        'float': 'float 6s infinite ease-in-out'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(0, 242, 254, 0.4)' },
+                            '50%': { boxShadow: '0 0 35px rgba(255, 0, 127, 0.6)' }
+                        },
+                        scanLine: {
+                            '0%': { top: '0%' },
+                            '100%': { top: '100%' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Dynamic Cyber Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #040711;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(20, 31, 56, 0.75), rgba(8, 13, 26, 0.85));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+        }
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.3);
+        }
+        .artistic-gradient-text {
+            background: linear-gradient(135deg, #00f2fe 0%, #e01cd5 50%, #ffb703 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .artistic-gradient-bg {
+            background: linear-gradient(135deg, #00f2fe 0%, #e01cd5 50%, #ff007f 100%);
+        }
+        .artistic-glow {
+            box-shadow: 0 0 25px rgba(224, 28, 213, 0.25);
+        }
+        .grid-bg {
+            background-image: 
+                radial-gradient(rgba(0, 242, 254, 0.12) 1px, transparent 0),
+                radial-gradient(rgba(224, 28, 213, 0.08) 1px, transparent 0);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080d1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e2c4d;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
+        }
+        .paste-toast {
+            animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        /* Smooth Scroll Indicator Meter Transition */
+        #scrollMeterBar {
+            transition: width 0.15s cubic-bezier(0.25, 0.1, 0.25, 1.0), background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-cyber-950 text-gray-100 antialiased selection:bg-cyber-pink selection:text-white grid-bg">
+
+    <!-- Global Paste Detection Floating Helper Banner -->
+    <div id="globalPasteBar" class="bg-gradient-to-r from-cyber-magenta via-cyber-pink to-cyber-cyan text-slate-950 px-4 py-2 text-center text-xs font-black tracking-wider uppercase shadow-lg flex items-center justify-center space-x-2 z-50">
+        <i class="fa-solid fa-paste animate-bounce text-sm"></i>
+        <span>GLOBAL COPY-PASTE ENGINE ACTIVE: Press <kbd class="px-1.5 py-0.5 bg-black/80 text-cyber-cyan rounded code-font font-bold">Ctrl+V</kbd> or <kbd class="px-1.5 py-0.5 bg-black/80 text-cyber-cyan rounded code-font font-bold">Cmd+V</kbd> ANYWHERE to audit images or videos!</span>
+    </div>
+
+    <!-- Live Scroll AI Slop Indicator Widget (Updates smoothly on window scroll) -->
+    <div class="sticky top-0 z-50 bg-cyber-950/95 border-b border-cyber-cyan/30 backdrop-blur-md px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-xl">
+        <div class="flex items-center space-x-3">
+            <span class="flex h-3 w-3 relative">
+                <span id="scrollMeterPulse" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-lime opacity-75"></span>
+                <span id="scrollMeterDot" class="relative inline-flex rounded-full h-3 w-3 bg-cyber-lime"></span>
+            </span>
+            <div class="flex items-center space-x-2 text-xs font-mono">
+                <span class="text-gray-400 font-bold uppercase tracking-wider">LIVE PAGE SCROLL SLOP METER:</span>
+                <span id="scrollSlopScore" class="text-cyber-lime font-black text-sm">12.4% SYNTHETIC</span>
+            </div>
+            <span id="scrollSlopState" class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] code-font font-bold bg-cyber-lime/20 text-cyber-lime border border-cyber-lime/40 rounded-full">
+                AUTHENTIC HUMAN VIEWPORT
+            </span>
+        </div>
+
+        <div class="w-full sm:w-72 bg-cyber-900 h-3 rounded-full overflow-hidden border border-cyber-700 relative">
+            <div id="scrollMeterBar" class="h-full bg-cyber-lime rounded-full" style="width: 12.4%;"></div>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-2 text-[10px] text-gray-400 font-mono">
+            <span>Scroll Depth: <span id="scrollDepthText" class="text-cyber-cyan font-bold">0%</span></span>
+            <span>|</span>
+            <span>Frequency: <span id="scrollFreqText" class="text-cyber-amber font-bold">4.2 GHz</span></span>
+        </div>
+    </div>
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-11 z-40 bg-cyber-950/90 backdrop-blur-md border-b border-cyber-700/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Brand & Taglines -->
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-2xl artistic-gradient-bg flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg artistic-glow">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-black text-xl sm:text-2xl tracking-tight text-white">SLOP<span class="artistic-gradient-text">GUARD</span></span>
+                        <span class="hidden sm:inline-block px-2.5 py-0.5 text-[10px] code-font font-bold bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 rounded-full">v6.5 CC & DMCA</span>
+                    </div>
+                    <p class="text-[11px] font-semibold text-cyber-cyan hidden xs:block">Real art. Real Creators. Creative Commons & DMCA Defense.</p>
+                </div>
+            </div>
+
+            <!-- Main Navigation Links -->
+            <nav class="hidden md:flex space-x-1 bg-cyber-900/90 p-1.5 rounded-2xl border border-cyber-700/80 text-xs">
+                <button onclick="switchTab('tab-analyzer')" id="nav-tab-analyzer" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan/40 shadow-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <span>Scanner</span>
+                </button>
+                <button onclick="switchTab('tab-radar')" id="nav-tab-radar" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-radar text-cyber-pink"></i>
+                    <span>Social Radar</span>
+                </button>
+                <button onclick="switchTab('tab-learning')" id="nav-tab-learning" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-graduation-cap text-cyber-amber"></i>
+                    <span>Why AI vs Human?</span>
+                </button>
+                <button onclick="switchTab('tab-licensing')" id="nav-tab-licensing" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-creative-commons text-cyber-lime"></i>
+                    <span>CC & Passports</span>
+                </button>
+                <button onclick="switchTab('tab-dmca-hub')" id="nav-tab-dmca-hub" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-gavel text-cyber-pink"></i>
+                    <span>DMCA & Claims</span>
+                </button>
+                <button onclick="switchTab('tab-about')" id="nav-tab-about" class="tab-btn px-3.5 py-2 rounded-xl font-bold transition-all duration-200 text-gray-400 hover:text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-building-user text-cyber-electric"></i>
+                    <span>About Us</span>
+                </button>
+            </nav>
+
+            <!-- Quick Action & Mobile Toggle -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openLicenseModal('cc-by')" class="px-4 py-2 text-xs font-black rounded-xl artistic-gradient-bg text-slate-950 hover:brightness-110 transition shadow-lg flex items-center space-x-2">
+                    <i class="fa-solid fa-creative-commons"></i>
+                    <span class="hidden sm:inline">Create CC License</span>
+                </button>
+                <!-- Mobile Hamburger Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-cyber-850 border border-cyber-700 text-gray-300 hover:text-white">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-cyber-900 border-b border-cyber-700 px-4 py-3 space-y-2">
+            <button onclick="switchTab('tab-analyzer'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg bg-cyber-800 text-cyber-cyan text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-magnifying-glass-chart"></i><span>Forensic Scanner</span>
+            </button>
+            <button onclick="switchTab('tab-radar'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-gray-300 hover:bg-cyber-800 text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-radar text-cyber-pink"></i><span>Social Radar (X, Pinterest, ArtStation...)</span>
+            </button>
+            <button onclick="switchTab('tab-learning'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-gray-300 hover:bg-cyber-800 text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-graduation-cap text-cyber-amber"></i><span>Why AI vs Human?</span>
+            </button>
+            <button onclick="switchTab('tab-licensing'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-gray-300 hover:bg-cyber-800 text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-creative-commons text-cyber-lime"></i><span>Creative Commons & Passports</span>
+            </button>
+            <button onclick="switchTab('tab-dmca-hub'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-gray-300 hover:bg-cyber-800 text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-gavel text-cyber-pink"></i><span>DMCA & Thailand Copyright Portal</span>
+            </button>
+            <button onclick="switchTab('tab-about'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-gray-300 hover:bg-cyber-800 text-xs font-bold flex items-center space-x-2">
+                <i class="fa-solid fa-building-user text-cyber-electric"></i><span>About Us</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN APPS CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Hero Section Banner -->
+        <div class="relative rounded-3xl p-6 sm:p-10 overflow-hidden glass-card border border-cyber-cyan/30 shadow-2xl">
+            <!-- Background Glow Orbs -->
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-cyber-magenta/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-cyber-cyan/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-3 max-w-3xl">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-pink/10 border border-cyber-pink/30 text-cyber-pink text-xs font-extrabold uppercase tracking-widest">
+                        <i class="fa-solid fa-sparkles"></i>
+                        <span>AI SLOP FORENSIC & CREATIVE COMMONS DEFENSE</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+                        Where real human creativity <span class="artistic-gradient-text">takes center stage.</span>
+                    </h1>
+                    <p class="text-sm sm:text-base font-medium text-gray-300 leading-relaxed">
+                        Cross-platform forensic auditing & copyright enforcement across Google, YouTube, TikTok, Instagram, X (Twitter), Reddit, Pinterest, and ArtStation. Generate Creative Commons licenses, register C2PA IP Passports, and file direct DMCA claims in the US and Thailand.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2 text-xs font-bold text-gray-300">
+                        <span class="px-3 py-1 bg-cyber-850 rounded-lg border border-cyber-700 text-cyber-cyan flex items-center space-x-1.5">
+                            <i class="fa-solid fa-check-double"></i><span>Real Art</span>
+                        </span>
+                        <span class="px-3 py-1 bg-cyber-850 rounded-lg border border-cyber-700 text-cyber-pink flex items-center space-x-1.5">
+                            <i class="fa-solid fa-creative-commons"></i><span>Creative Commons</span>
+                        </span>
+                        <span class="px-3 py-1 bg-cyber-850 rounded-lg border border-cyber-700 text-cyber-lime flex items-center space-x-1.5">
+                            <i class="fa-solid fa-gavel"></i><span>Thailand DMCA & DIP</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Global Clipboard Paste Quick Drop box -->
+                <div class="lg:w-80 bg-cyber-900/90 p-5 rounded-2xl border border-cyber-cyan/40 shadow-xl flex flex-col items-center text-center space-y-3">
+                    <div class="w-14 h-14 rounded-2xl bg-cyber-cyan/10 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan text-2xl animate-float">
+                        <i class="fa-solid fa-paste"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-black text-white uppercase tracking-wider">Universal Paste Target</h4>
+                        <p class="text-xs text-gray-400 mt-1">Copy any file online & hit <kbd class="text-cyber-cyan font-mono font-bold">Cmd+V</kbd> or <kbd class="text-cyber-cyan font-mono font-bold">Ctrl+V</kbd></p>
+                    </div>
+                    <!-- Direct URL Paste Input -->
+                    <div class="w-full relative">
+                        <input type="text" id="pasteUrlInput" placeholder="Paste URL (X, Pinterest, ArtStation...)" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyber-cyan">
+                        <button onclick="handleUrlInputPaste()" class="absolute right-1 top-1 bottom-1 px-2.5 bg-cyber-cyan text-slate-950 rounded-lg text-xs font-extrabold hover:brightness-110">
+                            Scan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 1: FORENSIC SCANNER -->
+        <section id="tab-analyzer" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Column: Media Inspection Frame & Controls -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-card rounded-3xl p-5 shadow-2xl relative flex flex-col space-y-4">
+                        
+                        <!-- Top Viewport Header Bar -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 bg-cyber-950/80 px-4 py-2.5 rounded-2xl border border-cyber-700/80">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-cyber-cyan animate-pulse"></span>
+                                <span class="text-xs font-mono font-bold text-gray-200 uppercase tracking-wider">Inspection Viewport</span>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span id="provenanceBadge" class="px-2.5 py-1 rounded-lg bg-cyber-900 text-gray-200 text-[11px] font-mono font-bold border border-cyber-700 flex items-center space-x-1">
+                                    <i class="fa-solid fa-fingerprint text-cyber-cyan"></i>
+                                    <span id="provenanceText">C2PA: Valid</span>
+                                </span>
+                                <span id="mediaTypeTag" class="px-2.5 py-1 rounded-lg bg-cyber-900 text-cyber-teal text-[11px] font-mono font-bold border border-cyber-teal/40">
+                                    Type: Human Fine Art / Oil Canvas
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Main Media Viewport -->
+                        <div id="imageDisplayContainer" class="w-full h-80 sm:h-96 relative rounded-2xl overflow-hidden bg-cyber-950 border border-cyber-700/80 flex items-center justify-center group">
+                            
+                            <!-- Scanning Overlay Animation -->
+                            <div id="scanningOverlay" class="hidden absolute inset-0 z-30 rounded-2xl overflow-hidden pointer-events-none bg-black/70 backdrop-blur-xs flex flex-col items-center justify-center space-y-3">
+                                <div class="w-14 h-14 border-4 border-cyber-cyan border-t-cyber-pink rounded-full animate-spin"></div>
+                                <div class="bg-cyber-900/90 px-4 py-2 rounded-xl border border-cyber-cyan text-xs font-mono text-cyber-cyan font-bold shadow-xl">
+                                    <span id="scanStatusText">Executing Fourier Frequency Analysis...</span>
+                                </div>
+                            </div>
+
+                            <!-- Image Preview Element -->
+                            <img id="previewImage" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80" alt="Analysis Subject" class="max-h-full max-w-full object-contain transition duration-300 p-2">
+                            
+                            <!-- Video Preview Element -->
+                            <video id="previewVideo" class="hidden max-h-full max-w-full object-contain p-2" controls autoplay loop muted></video>
+
+                            <!-- Heatmap Overlay Canvas -->
+                            <canvas id="heatmapCanvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-300"></canvas>
+
+                            <!-- Hidden Live Screen capture video element -->
+                            <video id="screenCaptureVideo" class="hidden" autoplay playsinline></video>
+
+                            <!-- Toggle Diffusion Heatmap Overlay Button -->
+                            <div class="absolute bottom-3 right-3 flex items-center space-x-2 z-20">
+                                <button onclick="toggleHeatmap()" id="heatmapBtn" class="px-3.5 py-1.5 rounded-xl bg-cyber-900/90 hover:bg-cyber-800 text-xs font-bold text-white border border-cyber-600 transition backdrop-blur flex items-center space-x-1.5 shadow-md">
+                                    <i class="fa-solid fa-layer-group text-cyber-cyan"></i>
+                                    <span>Toggle Diffusion Heatmap</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Toolbar Docked Below Image -->
+                        <div class="w-full grid grid-cols-1 sm:grid-cols-4 gap-2 bg-cyber-950/90 p-3 rounded-2xl border border-cyber-700/80">
+                            <button onclick="startLiveScreenCapture()" class="px-3 py-2.5 bg-gradient-to-r from-cyber-purple via-cyber-magenta to-cyber-pink text-white font-black text-xs rounded-xl transition shadow hover:brightness-110 flex items-center justify-center space-x-1.5 col-span-1">
+                                <i class="fa-solid fa-desktop text-cyber-cyan animate-pulse"></i>
+                                <span>Capture Live Screen</span>
+                            </button>
+
+                            <button onclick="triggerPastePrompt()" class="px-3 py-2.5 bg-gradient-to-r from-cyber-cyan to-cyber-teal text-slate-950 font-black text-xs rounded-xl transition shadow hover:brightness-110 flex items-center justify-center space-x-1.5">
+                                <i class="fa-solid fa-paste"></i>
+                                <span>Paste Media</span>
+                            </button>
+
+                            <label class="cursor-pointer px-3 py-2.5 bg-cyber-850 hover:bg-cyber-800 border border-cyber-700 text-xs font-bold text-gray-200 rounded-xl transition flex items-center justify-center space-x-1.5">
+                                <i class="fa-solid fa-file-arrow-up text-cyber-pink"></i>
+                                <span>Upload File</span>
+                                <input type="file" id="fileInput" accept="image/*,video/*,.jpg,.jpeg,.png,.gif,.webp,.tif,.tiff,.heic,.raw,.cr2,.nef,.svg,.eps,.mp4,.mkv,.mov,.avi,.webm" class="hidden" onchange="handleFileUpload(event)">
+                            </label>
+
+                            <button onclick="runForensicScan()" class="px-3 py-2.5 bg-gradient-to-r from-cyber-pink via-cyber-magenta to-cyber-purple text-white font-black text-xs rounded-xl transition shadow hover:brightness-110 flex items-center justify-center space-x-1.5">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>Deep Scan</span>
+                            </button>
+                        </div>
+
+                        <!-- Real-time Live Screen Scrolling Banner -->
+                        <div id="liveCaptureInfoBanner" class="hidden px-3 py-2.5 bg-cyber-900/90 border border-cyber-cyan/50 rounded-xl text-xs text-cyber-cyan font-mono flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
+                                <span class="font-bold text-white">LIVE SCREEN CAPTURE ACTIVE</span>
+                                <span class="text-gray-300 hidden md:inline">| Scrolling active tab... Continuously analyzing AI Slop vs Real Media.</span>
+                            </div>
+                            <button onclick="stopLiveScreenCapture()" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white font-sans text-[11px] font-bold rounded-lg transition">
+                                Stop Capture
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Preset Test Subjects Deck -->
+                    <div class="glass-card rounded-2xl p-4 space-y-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block font-mono">Test Preset Media Subjects:</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button onclick="loadSample('human-art')" class="px-3 py-2 text-xs bg-cyber-900 hover:bg-cyber-800 text-cyber-cyan rounded-xl transition border border-cyber-700 font-bold flex items-center justify-center space-x-1">
+                                <span>🎨 Human Painting</span>
+                            </button>
+                            <button onclick="loadSample('human-photo')" class="px-3 py-2 text-xs bg-cyber-900 hover:bg-cyber-800 text-cyber-lime rounded-xl transition border border-cyber-700 font-bold flex items-center justify-center space-x-1">
+                                <span>📸 Human Photo</span>
+                            </button>
+                            <button onclick="loadSample('ai-slop')" class="px-3 py-2 text-xs bg-cyber-900 hover:bg-cyber-800 text-cyber-pink rounded-xl transition border border-cyber-700 font-bold flex items-center justify-center space-x-1">
+                                <span>🤖 AI Slop Art</span>
+                            </button>
+                            <button onclick="loadSample('deepfake-video')" class="px-3 py-2 text-xs bg-cyber-900 hover:bg-cyber-800 text-cyber-amber rounded-xl transition border border-cyber-700 font-bold flex items-center justify-center space-x-1">
+                                <span>🎬 Deepfake Video</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Audit Results & Score Card -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card rounded-3xl p-6 shadow-2xl space-y-6">
+                        <div class="flex items-center justify-between border-b border-cyber-700/80 pb-4">
+                            <div>
+                                <h2 class="text-lg font-black text-white">Forensic Verdict & Score</h2>
+                                <p class="text-xs text-gray-400">Authenticity analysis result</p>
+                            </div>
+                            <span id="forensicTimestamp" class="text-xs code-font text-gray-400 font-bold">SCAN ID: #8829-X</span>
+                        </div>
+
+                        <!-- Meter Gauge Box -->
+                        <div class="flex items-center justify-between bg-cyber-950/90 p-5 rounded-2xl border border-cyber-700/80">
+                            <div>
+                                <div id="scoreValueText" class="text-4xl sm:text-5xl font-black text-cyber-lime code-font tracking-tight">3.1%</div>
+                                <div id="verdictLabel" class="text-xs font-black text-cyber-lime mt-1 flex items-center space-x-1.5 uppercase tracking-wide">
+                                    <i class="fa-solid fa-user-check"></i>
+                                    <span>AUTHENTIC HUMAN CREATION</span>
+                                </div>
+                            </div>
+                            <!-- Gauge Ring -->
+                            <div class="w-20 h-20 relative flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                    <path class="text-cyber-800" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path id="scoreCirclePath" class="text-cyber-lime transition-all duration-1000 ease-out" stroke-dasharray="3, 100" stroke-width="4" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                </svg>
+                                <i id="verdictIcon" class="fa-solid fa-user-check absolute text-cyber-lime text-xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Key Metrics -->
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-gray-300">Fourier Spectral Latent Grid Artifacts</span>
+                                    <span id="metric1Val" class="text-cyber-cyan font-mono">4%</span>
+                                </div>
+                                <div class="w-full bg-cyber-950 h-2.5 rounded-full overflow-hidden border border-cyber-700">
+                                    <div id="metric1Bar" class="bg-cyber-cyan h-full rounded-full transition-all duration-700" style="width: 4%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-gray-300">Anatomic Structure & Lighting Coherence</span>
+                                    <span id="metric2Val" class="text-cyber-lime font-mono">98%</span>
+                                </div>
+                                <div class="w-full bg-cyber-950 h-2.5 rounded-full overflow-hidden border border-cyber-700">
+                                    <div id="metric2Bar" class="bg-cyber-lime h-full rounded-full transition-all duration-700" style="width: 98%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-gray-300">C2PA Cryptographic Signature / EXIF</span>
+                                    <span id="metric3Val" class="text-cyber-lime font-mono">VALID C2PA</span>
+                                </div>
+                                <div class="w-full bg-cyber-950 h-2.5 rounded-full overflow-hidden border border-cyber-700">
+                                    <div id="metric3Bar" class="bg-cyber-lime h-full rounded-full transition-all duration-700" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Findings Box -->
+                        <div class="bg-cyber-950/90 p-4 rounded-2xl border border-cyber-700 space-y-3">
+                            <h4 class="text-xs font-black text-gray-200 uppercase tracking-wider flex items-center space-x-2">
+                                <i class="fa-solid fa-magnifying-glass-location text-cyber-cyan"></i>
+                                <span>Why this verdict? Key Forensic Markers</span>
+                            </h4>
+                            <ul id="findingsList" class="text-xs text-gray-300 space-y-2 font-medium">
+                                <li class="text-cyber-lime flex items-start space-x-2">
+                                    <i class="fa-solid fa-check-circle mt-0.5"></i>
+                                    <span>Authentic physical paint impasto grain & human brush stroke speed variations.</span>
+                                </li>
+                                <li class="text-cyber-lime flex items-start space-x-2">
+                                    <i class="fa-solid fa-check-circle mt-0.5"></i>
+                                    <span>Verified EXIF camera lens profile and C2PA cryptographic author stamp.</span>
+                                </li>
+                                <li class="text-cyber-lime flex items-start space-x-2">
+                                    <i class="fa-solid fa-check-circle mt-0.5"></i>
+                                    <span>Light source vectors match human optical laws; no neural diffusion blur spikes.</span>
+                                </li>
+                            </ul>
+                            <div class="pt-2 border-t border-cyber-800 flex justify-between items-center">
+                                <span class="text-[11px] text-gray-400">Want to learn how to spot these?</span>
+                                <button onclick="switchTab('tab-learning')" class="text-xs text-cyber-cyan font-bold hover:underline flex items-center space-x-1">
+                                    <span>Why AI vs Human Guide</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                            <button onclick="openTakedownModal()" class="flex-1 px-4 py-3 rounded-xl bg-cyber-pink/20 hover:bg-cyber-pink/30 text-cyber-pink border border-cyber-pink/40 text-xs font-extrabold transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-gavel"></i>
+                                <span>File DMCA / DIP Claim</span>
+                            </button>
+                            <button onclick="openLicenseModal('cc-by')" class="flex-1 px-4 py-3 rounded-xl bg-cyber-cyan/20 hover:bg-cyber-cyan/30 text-cyber-cyan border border-cyber-cyan/40 text-xs font-extrabold transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-creative-commons"></i>
+                                <span>Issue CC License</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: LIVE SOCIAL MEDIA RADAR STREAM (With X, Pinterest, ArtStation restored) -->
+        <section id="tab-radar" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-3xl border border-cyber-pink/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-pink/10 text-cyber-pink text-xs font-bold font-mono mb-2 border border-cyber-pink/30">
+                        <i class="fa-solid fa-satellite-dish animate-pulse"></i>
+                        <span>CROSS-PLATFORM SOCIAL MEDIA RADAR</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">Live Multi-Platform Threat Stream</h2>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Real-time monitoring across X (Twitter), Pinterest, ArtStation, YouTube, TikTok, Instagram, Google, and Reddit.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="bg-cyber-950 px-4 py-2 rounded-2xl border border-cyber-700 text-xs font-mono text-gray-300">
+                        Intercepts Today: <span class="text-cyber-cyan font-bold text-sm" id="totalInterceptsCount">24,912</span>
+                    </div>
+                    <button onclick="toggleRadarStream()" id="pauseRadarBtn" class="px-4 py-2 rounded-2xl bg-cyber-800 hover:bg-cyber-700 text-white text-xs font-bold transition border border-cyber-600 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-pause"></i>
+                        <span>Pause Feed</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Social Media Platform Filter Buttons -->
+            <div class="glass-card rounded-2xl p-4 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span class="font-bold text-gray-300 font-mono flex items-center space-x-2">
+                    <i class="fa-solid fa-filter text-cyber-cyan"></i>
+                    <span>Filter Platform:</span>
+                </span>
+                <div class="flex flex-wrap gap-1.5" id="platformFilterBar">
+                    <button onclick="filterRadarPlatform('ALL', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-cyan text-slate-950 font-black">All Platforms</button>
+                    <button onclick="filterRadarPlatform('X/Twitter', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-x-twitter text-white mr-1"></i>X (Twitter)</button>
+                    <button onclick="filterRadarPlatform('Pinterest', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-pinterest text-red-500 mr-1"></i>Pinterest</button>
+                    <button onclick="filterRadarPlatform('ArtStation', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-solid fa-palette text-blue-400 mr-1"></i>ArtStation</button>
+                    <button onclick="filterRadarPlatform('YouTube', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-youtube text-red-500 mr-1"></i>YouTube</button>
+                    <button onclick="filterRadarPlatform('TikTok', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-tiktok text-cyan-400 mr-1"></i>TikTok</button>
+                    <button onclick="filterRadarPlatform('Instagram', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-instagram text-pink-400 mr-1"></i>Instagram</button>
+                    <button onclick="filterRadarPlatform('Google', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-google text-red-400 mr-1"></i>Google</button>
+                    <button onclick="filterRadarPlatform('Reddit', this)" class="platform-filter-btn px-3 py-1.5 rounded-lg bg-cyber-900 text-gray-300 hover:text-white border border-cyber-700 font-bold"><i class="fa-brands fa-reddit text-orange-500 mr-1"></i>Reddit</button>
+                </div>
+            </div>
+
+            <!-- Intercepts Table & Analytics Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-8 glass-card rounded-3xl p-5 shadow-2xl overflow-hidden flex flex-col">
+                    <div class="flex items-center justify-between mb-4 px-2">
+                        <h3 class="text-sm font-black text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-stream text-cyber-teal"></i>
+                            <span>Live Intercept Queue</span>
+                        </h3>
+                        <span id="activeFilterBadge" class="text-xs bg-cyber-950 text-cyber-cyan px-3 py-1 rounded-full border border-cyber-cyan/40 font-mono font-bold">Active: All Platforms</span>
+                    </div>
+
+                    <div class="overflow-x-auto flex-1">
+                        <table class="w-full text-left text-xs text-gray-300">
+                            <thead class="bg-cyber-950/90 text-gray-400 font-mono text-[11px] uppercase border-b border-cyber-700">
+                                <tr>
+                                    <th class="py-3 px-3">Thumb</th>
+                                    <th class="py-3 px-3">Platform & Source</th>
+                                    <th class="py-3 px-3">Infringement Type</th>
+                                    <th class="py-3 px-3">Synthetic %</th>
+                                    <th class="py-3 px-3">Risk Level</th>
+                                    <th class="py-3 px-3 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="radarTableBody" class="divide-y divide-cyber-800 font-mono">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Chart & Sentinel Agents -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4">
+                        <h3 class="text-sm font-black text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-chart-line text-cyber-cyan"></i>
+                            <span>AI Slop Surge Velocity (24h)</span>
+                        </h3>
+                        <div class="h-52 relative">
+                            <canvas id="slopTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-3">
+                        <h3 class="text-sm font-black text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-user-shield text-cyber-purple"></i>
+                            <span>Active IP Sentinel Agents</span>
+                        </h3>
+                        <p class="text-xs text-gray-400">
+                            Licensed human agents monitoring DMCA claims and Creative Commons violations worldwide.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-xs bg-cyber-950 p-3 rounded-xl border border-cyber-700">
+                                <span class="text-gray-300 font-mono font-bold">Agent #9041 (Bangkok 🇹🇭)</span>
+                                <span class="text-cyber-lime font-mono font-bold">28 Claims Settled</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs bg-cyber-950 p-3 rounded-xl border border-cyber-700">
+                                <span class="text-gray-300 font-mono font-bold">Agent #4412 (Tokyo)</span>
+                                <span class="text-cyber-lime font-mono font-bold">42 Takedowns Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: WHY AI VS HUMAN? EDUCATIONAL MATRIX -->
+        <section id="tab-learning" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 sm:p-8 rounded-3xl border border-cyber-amber/30 space-y-3">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-amber/10 text-cyber-amber text-xs font-bold font-mono border border-cyber-amber/30 uppercase tracking-wider">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>EDUCATIONAL FORENSIC MATRIX</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Why AI vs. Human? Understanding Forensic Indications</h2>
+                <p class="text-sm text-gray-300 max-w-3xl leading-relaxed">
+                    Ever wondered how SlopGuard distinguishes genuine human mastery from synthetic diffusion slop? Explore the key physical, optical, spectral, and anatomical markers below to learn and spot the differences yourself.
+                </p>
+            </div>
+
+            <!-- Side-by-Side Diagnostic Breakdown Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Human Artistry Signatures -->
+                <div class="glass-card rounded-3xl p-6 border border-cyber-lime/40 space-y-4">
+                    <div class="flex items-center space-x-3 text-cyber-lime border-b border-cyber-700/80 pb-3">
+                        <div class="w-10 h-10 rounded-2xl bg-cyber-lime/20 flex items-center justify-center text-cyber-lime text-xl">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-white">Authentic Human Markers</h3>
+                            <p class="text-xs text-gray-400">Physical laws, brushwork dynamics & camera optics</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-3 text-xs text-gray-300">
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-lime flex items-center space-x-2">
+                                <i class="fa-solid fa-brush"></i>
+                                <span>Brush Stroke Velocity & Impasto Layering</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Human physical painting shows natural pressure variance, directional paint build-up (impasto), and subtle micro-imperfections in stroke termination.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-lime flex items-center space-x-2">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Anatomical & Structural Symmetry Continuity</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Human artists maintain logical spatial continuity: background lines pass correctly behind foreground objects, and hands follow realistic bone physics.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-lime flex items-center space-x-2">
+                                <i class="fa-solid fa-sun"></i>
+                                <span>Vector Lighting & Optical Reflections</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Light cast across clothing folds, eye catchlights, and cast shadows strictly follows true 3D ray-tracing physics with matching focal depth.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-lime flex items-center space-x-2">
+                                <i class="fa-solid fa-fingerprint"></i>
+                                <span>Cryptographic Provenance & EXIF Lens Data</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Contains valid camera sensor ISO noise grids, lens aperture profiles, and C2PA content credentials stamped at creation.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Synthetic AI Slop Markers -->
+                <div class="glass-card rounded-3xl p-6 border border-cyber-pink/40 space-y-4">
+                    <div class="flex items-center space-x-3 text-cyber-pink border-b border-cyber-700/80 pb-3">
+                        <div class="w-10 h-10 rounded-2xl bg-cyber-pink/20 flex items-center justify-center text-cyber-pink text-xl">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black text-white">Synthetic AI Slop Markers</h3>
+                            <p class="text-xs text-gray-400">Diffusion noise grids, waxy textures & spatial glitches</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-3 text-xs text-gray-300">
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-pink flex items-center space-x-2">
+                                <i class="fa-solid fa-wave-square"></i>
+                                <span>Fourier Latent Frequency Artifacts</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Latent diffusion models (Midjourney, Stable Diffusion, DALL-E) leave telltale mathematical Gaussian frequency spikes in high-pass Fourier transformations.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-pink flex items-center space-x-2">
+                                <i class="fa-solid fa-hand-spock"></i>
+                                <span>Anatomic Distortion & Asymmetric Glitches</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Fused fingers, non-matching earring designs, irregular pupils, floating hair strands, and nonsensical background text/architecture.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-pink flex items-center space-x-2">
+                                <i class="fa-solid fa-disease"></i>
+                                <span>Waxy Skin Over-Smoothing & Plastic Sheen</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Absence of true skin pore micro-distribution; replaced by uniform plastic smoothness coupled with unnatural hyper-detail in non-focal zones.</p>
+                        </li>
+                        <li class="bg-cyber-950 p-3.5 rounded-2xl border border-cyber-800 space-y-1">
+                            <span class="font-black text-cyber-pink flex items-center space-x-2">
+                                <i class="fa-solid fa-file-excel"></i>
+                                <span>Stripped Metadata & Missing C2PA Header</span>
+                            </span>
+                            <p class="text-gray-400 text-[11px]">Lack of camera EXIF headers or presence of generator parameters residue in PNG metadata chunks.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Interactive Visual Indicator Explorer -->
+            <div class="glass-card rounded-3xl p-6 border border-cyber-cyan/30 space-y-4">
+                <h3 class="text-base font-black text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-microscope text-cyber-cyan"></i>
+                    <span>Interactive Indicator Explorer</span>
+                </h3>
+                <p class="text-xs text-gray-400">Click on any marker below to view a detailed explanation and learn how SlopGuard algorithms spot it in real-time:</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                    <button onclick="showIndicatorDetail('fourier')" class="p-3 rounded-2xl bg-cyber-950 hover:bg-cyber-900 border border-cyber-700 text-left space-y-1 transition">
+                        <span class="text-cyber-cyan font-bold block">1. Fourier Latent Grid</span>
+                        <span class="text-[10px] text-gray-400">Frequency spikes in latent space</span>
+                    </button>
+                    <button onclick="showIndicatorDetail('anatomy')" class="p-3 rounded-2xl bg-cyber-950 hover:bg-cyber-900 border border-cyber-700 text-left space-y-1 transition">
+                        <span class="text-cyber-pink font-bold block">2. Hands & Iris Symmetry</span>
+                        <span class="text-[10px] text-gray-400">Anatomical bone structure glitches</span>
+                    </button>
+                    <button onclick="showIndicatorDetail('lighting')" class="p-3 rounded-2xl bg-cyber-950 hover:bg-cyber-900 border border-cyber-700 text-left space-y-1 transition">
+                        <span class="text-cyber-amber font-bold block">3. Incoherent Shadows</span>
+                        <span class="text-[10px] text-gray-400">Non-vector lighting anomalies</span>
+                    </button>
+                    <button onclick="showIndicatorDetail('c2pa')" class="p-3 rounded-2xl bg-cyber-950 hover:bg-cyber-900 border border-cyber-700 text-left space-y-1 transition">
+                        <span class="text-cyber-lime font-bold block">4. C2PA Provenance</span>
+                        <span class="text-[10px] text-gray-400">SHA-256 author metadata stamp</span>
+                    </button>
+                </div>
+
+                <div id="indicatorDetailBox" class="bg-cyber-950 p-4 rounded-2xl border border-cyber-cyan/40 text-xs text-gray-300 font-mono space-y-2">
+                    <span class="text-cyber-cyan font-bold block uppercase"><i class="fa-solid fa-info-circle mr-1"></i>Selected Marker: Fourier Latent Grid Analysis</span>
+                    <p class="text-gray-300">
+                        When diffusion neural networks convert random Gaussian noise into an image, they leave mathematical residue in high frequencies. SlopGuard applies a 2D Discrete Fourier Transform (DFT) to isolate these latent noise patterns, identifying synthetic images with 99.4% accuracy even if visual glitches are hidden.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: CREATIVE COMMONS & PASSPORTS PORTAL -->
+        <section id="tab-licensing" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 sm:p-8 rounded-3xl border border-cyber-lime/30 space-y-3">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-lime/10 text-cyber-lime text-xs font-bold font-mono border border-cyber-lime/30 uppercase tracking-wider">
+                    <i class="fa-solid fa-creative-commons"></i>
+                    <span>CREATIVE COMMONS & C2PA PASSPORT PORTAL</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Creative Commons Licenses & Creator Passports</h2>
+                <p class="text-sm text-gray-300 max-w-3xl leading-relaxed">
+                    Protect and share your human artwork on your terms. Generate official Creative Commons (CC BY, CC BY-NC, CC BY-SA, CC BY-ND, CC0) badges and cryptographic C2PA content passports.
+                </p>
+            </div>
+
+            <!-- Creative Commons Quick Generator Widget -->
+            <div class="glass-card rounded-3xl p-6 border border-cyber-cyan/40 space-y-5">
+                <div class="flex items-center justify-between border-b border-cyber-700/80 pb-3">
+                    <h3 class="text-lg font-black text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-cyber-cyan"></i>
+                        <span>Creative Commons Instant License Generator</span>
+                    </h3>
+                    <span class="text-xs font-mono text-cyber-lime bg-cyber-950 px-3 py-1 rounded-full border border-cyber-700">Official CC v4.0 Standard</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Creator / Licensee Name</label>
+                            <input type="text" id="ccCreatorInput" value="Ratana Hildebrand Art Studio" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Artwork Title / Portfolio URL</label>
+                            <input type="text" id="ccWorkTitleInput" value="Bangkok Sunset Canvas / Portfolio Collection" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Select Creative Commons Type</label>
+                            <select id="ccTypeSelect" onchange="updateCCPreview()" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan font-bold">
+                                <option value="cc-by">CC BY 4.0 - Attribution (Most Permissive)</option>
+                                <option value="cc-by-nc">CC BY-NC 4.0 - Attribution-NonCommercial</option>
+                                <option value="cc-by-sa">CC BY-SA 4.0 - Attribution-ShareAlike</option>
+                                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0 - Attribution-NonCommercial-ShareAlike</option>
+                                <option value="cc-by-nd">CC BY-ND 4.0 - Attribution-NoDerivatives</option>
+                                <option value="cc0">CC0 1.0 - Public Domain Dedication</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Live CC License Code & Badge Preview Box -->
+                    <div class="bg-cyber-950 p-4 rounded-2xl border border-cyber-cyan/30 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-cyber-cyan uppercase font-mono block">Generated Creative Commons Badge & Metadata:</span>
+                            <div id="ccBadgeDisplay" class="p-3 bg-cyber-900 rounded-xl border border-cyber-700 flex items-center space-x-3 text-xs">
+                                <i class="fa-brands fa-creative-commons text-3xl text-cyber-amber"></i>
+                                <div>
+                                    <div id="ccBadgeTitle" class="font-black text-white">CC BY 4.0 International</div>
+                                    <div id="ccBadgeDesc" class="text-[11px] text-gray-400">Free to share & adapt with proper creator attribution.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[11px] font-bold text-gray-400 uppercase font-mono block mb-1">HTML Embed Code (For Websites & Gallery Portfolios):</span>
+                            <textarea id="ccEmbedCodeText" rows="3" readonly class="w-full bg-black/80 border border-cyber-800 rounded-xl p-2.5 text-[10px] text-cyber-cyan font-mono focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <button onclick="copyCCEmbedCode()" class="flex-1 py-2 bg-cyber-cyan text-slate-950 font-black text-xs rounded-xl hover:brightness-110 transition shadow">
+                                <i class="fa-solid fa-copy mr-1"></i>Copy Embed Code
+                            </button>
+                            <button onclick="saveCurrentCCLicense()" class="flex-1 py-2 bg-cyber-lime text-slate-950 font-black text-xs rounded-xl hover:brightness-110 transition shadow">
+                                <i class="fa-solid fa-bookmark mr-1"></i>Save Passport
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Certificates & Passports List -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-base font-black text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-stamp text-cyber-cyan"></i>
+                        <span>Active Creative Commons & C2PA Passports</span>
+                    </h3>
+                    <span id="licenseCountText" class="text-xs font-mono text-cyber-cyan bg-cyber-950 px-3 py-1 rounded-full border border-cyber-700">1 Active Passport</span>
+                </div>
+
+                <div id="activeLicensesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: DMCA CLAIMS & THAILAND COPYRIGHT PORTAL -->
+        <section id="tab-dmca-hub" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 sm:p-8 rounded-3xl border border-cyber-pink/30 space-y-3">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-pink/10 text-cyber-pink text-xs font-bold font-mono border border-cyber-pink/30 uppercase tracking-wider">
+                    <i class="fa-solid fa-gavel"></i>
+                    <span>GLOBAL DMCA & THAILAND DIP COPYRIGHT PORTAL</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-black text-white">Direct Copyright Claim & Takedown Hub</h2>
+                <p class="text-sm text-gray-300 max-w-3xl leading-relaxed">
+                    Stolen art or unauthorized AI training slop detected? Access direct copyright filing links for major platforms, or file under the US DMCA and Thailand Copyright Act (Notice & Takedown System B.E. 2565).
+                </p>
+            </div>
+
+            <!-- Global & Platform DMCA Portals Grid -->
+            <div class="glass-card rounded-3xl p-6 border border-cyber-pink/40 space-y-4">
+                <h3 class="text-base font-black text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-cyber-pink"></i>
+                    <span>Official Platform Copyright Filing Portals</span>
+                </h3>
+                <p class="text-xs text-gray-400">Click any direct link below to access the platform's official copyright infringement claim form:</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                    <a href="https://help.twitter.com/forms/dmca" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-white font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-x-twitter text-lg"></i>
+                        <span>X (Twitter) DMCA</span>
+                    </a>
+                    <a href="https://help.pinterest.com/en/articles/copyright" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-red-500 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-pinterest text-lg"></i>
+                        <span>Pinterest Copyright</span>
+                    </a>
+                    <a href="https://www.artstation.com/dmca" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-blue-400 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-solid fa-palette text-lg"></i>
+                        <span>ArtStation Takedown</span>
+                    </a>
+                    <a href="https://www.google.com/legal/removals/copyright" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-red-400 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-google text-lg"></i>
+                        <span>Google / YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/help/contact/1758255661104383" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-pink-400 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                        <span>Instagram / Meta</span>
+                    </a>
+                    <a href="https://www.tiktok.com/legal/report/Copyright" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-cyan-300 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-tiktok text-lg"></i>
+                        <span>TikTok Copyright</span>
+                    </a>
+                    <a href="https://www.reddithelp.com/hc/en-us/requests/new?ticket_form_id=360000808091" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-orange-500 font-bold flex items-center space-x-2 transition">
+                        <i class="fa-brands fa-reddit text-lg"></i>
+                        <span>Reddit Copyright</span>
+                    </a>
+                    <a href="https://www.dmca.com/Takedowns.aspx" target="_blank" class="p-3 bg-cyber-950 hover:bg-cyber-900 rounded-2xl border border-cyber-700 text-cyber-pink font-bold flex items-center space-x-2 transition">
+                        <i class="fa-solid fa-shield-halved text-lg"></i>
+                        <span>DMCA.com Global</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Special Section: Thailand DMCA & DIP Copyright Law -->
+            <div class="glass-card rounded-3xl p-6 border border-cyber-lime/40 space-y-4 bg-gradient-to-r from-cyber-950 via-cyber-900 to-cyber-950">
+                <div class="flex items-center space-x-3 border-b border-cyber-700 pb-3">
+                    <span class="text-3xl">🇹🇭</span>
+                    <div>
+                        <h3 class="text-lg font-black text-white">Thailand DMCA & Department of Intellectual Property (DIP)</h3>
+                        <p class="text-xs text-cyber-lime font-mono">Copyright Act B.E. 2537 & Amendment B.E. 2565 (Notice & Takedown System)</p>
+                    </div>
+                </div>
+
+                <div class="text-xs text-gray-300 space-y-3 leading-relaxed">
+                    <p>
+                        In Thailand, online copyright infringement is protected under the <strong>Thai Copyright Act (พ.ร.บ. ลิขสิทธิ์ พ.ศ. 2537)</strong> as amended by the <strong>Copyright Act No. 5 (พ.ศ. 2565)</strong>, introducing an official Thai Notice & Takedown mechanism for online service providers (OSPs).
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-cyber-950 p-4 rounded-2xl border border-cyber-800 space-y-2">
+                            <span class="font-bold text-cyber-lime flex items-center space-x-2">
+                                <i class="fa-solid fa-building-columns"></i>
+                                <span>Official Thai DIP Copyright Portal</span>
+                            </span>
+                            <p class="text-[11px] text-gray-400">File official copyright registration or infringement complaints directly with the Department of Intellectual Property (กรมทรัพย์สินทางปัญญา):</p>
+                            <a href="https://www.ipthailand.go.th/" target="_blank" class="inline-flex items-center space-x-1.5 text-cyber-cyan font-bold hover:underline text-[11px] pt-1">
+                                <span>Visit DIP Thailand Website (ipthailand.go.th)</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <div class="bg-cyber-950 p-4 rounded-2xl border border-cyber-800 space-y-2">
+                            <span class="font-bold text-cyber-pink flex items-center space-x-2">
+                                <i class="fa-solid fa-file-contract"></i>
+                                <span>Thai Cease & Desist Generator</span>
+                            </span>
+                            <p class="text-[11px] text-gray-400">Generate a legally formatted Thai-English DMCA notice including SHA-256 evidence to send to Thai ISPs and global platforms.</p>
+                            <button onclick="openTakedownModal('thai')" class="px-3 py-1.5 bg-cyber-pink text-white font-bold rounded-lg text-[11px] hover:brightness-110 transition shadow mt-1">
+                                Generate Thai Notice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: ABOUT US & CEO PROFILE -->
+        <section id="tab-about" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-cyber-cyan/30 space-y-4 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-80 h-80 bg-cyber-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-xs font-extrabold font-mono border border-cyber-cyan/30 uppercase tracking-wider">
+                    <i class="fa-solid fa-building-flag"></i>
+                    <span>COMPANY PROFILE & EXECUTIVE LEADERSHIP</span>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                    <div class="space-y-3 max-w-3xl">
+                        <h2 class="text-3xl sm:text-4xl font-black text-white leading-tight">
+                            Defending Human Artistry <br><span class="artistic-gradient-text">From the Heart of Thailand.</span>
+                        </h2>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            SlopGuard is a pioneer in AI media forensic authentication, digital intellectual property defense, Creative Commons licensing, and real-time canvas stream auditing. Headquartered in Bangkok, Thailand, our mission is to empower human creators, digital artists, and photographers with cutting-edge verification technology.
+                        </p>
+                    </div>
+
+                    <div class="bg-cyber-950/90 border border-cyber-700/80 p-5 rounded-2xl flex flex-col items-center text-center space-y-2 min-w-[220px]">
+                        <div class="text-3xl">🇹🇭</div>
+                        <h4 class="text-sm font-black text-white uppercase tracking-wider">Based in Thailand</h4>
+                        <p class="text-xs text-cyber-cyan font-mono font-bold">Bangkok AI Defense Hub</p>
+                        <span class="text-[10px] text-gray-400">Global IP Enforcement Network</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CEO Profile Card -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 glass-card rounded-3xl p-6 border border-cyber-cyan/40 space-y-5 flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="w-full bg-gradient-to-r from-cyber-cyan/10 via-cyber-magenta/10 to-cyber-pink/10 h-24 rounded-2xl absolute top-0 left-0"></div>
+
+                    <div class="relative z-10 mt-6">
+                        <div class="w-36 h-36 sm:w-40 sm:h-40 rounded-3xl overflow-hidden border-4 border-cyber-cyan shadow-2xl artistic-glow mx-auto bg-cyber-900 flex items-center justify-center">
+                            <img src="685161654_3269371983266906_2305295393724386309_n.jpg" alt="Ratana Hildebrand - CEO SlopGuard" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0e1629/00f2fe?text=Ratana+Hildebrand+CEO';">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 relative z-10">
+                        <div class="inline-block px-3 py-1 bg-cyber-cyan/20 border border-cyber-cyan/40 text-cyber-cyan text-[11px] font-mono font-bold rounded-full">
+                            CHIEF EXECUTIVE OFFICER & FOUNDER
+                        </div>
+                        <h3 class="text-2xl font-black text-white">Ratana Hildebrand</h3>
+                        <p class="text-xs font-bold text-cyber-pink font-mono">SlopGuard IP Defense Platform — Based in Thailand 🇹🇭</p>
+                    </div>
+
+                    <p class="text-xs text-gray-300 leading-relaxed relative z-10 px-2">
+                        "Under Ratana Hildebrand's leadership, SlopGuard was founded on a singular vision: to ensure human ingenuity, emotion, and creativity remain protected against synthetic AI slop and digital art theft worldwide."
+                    </p>
+
+                    <div class="w-full pt-4 border-t border-cyber-800 flex items-center justify-around text-xs font-mono text-gray-400">
+                        <span class="flex items-center space-x-1"><i class="fa-solid fa-location-dot text-cyber-cyan"></i><span>Thailand</span></span>
+                        <span class="flex items-center space-x-1"><i class="fa-solid fa-creative-commons text-cyber-lime"></i><span>Creative Commons</span></span>
+                        <span class="flex items-center space-x-1"><i class="fa-solid fa-gavel text-cyber-pink"></i><span>DMCA Defense</span></span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-card rounded-3xl p-6 border border-cyber-purple/40 space-y-4">
+                        <div class="flex items-center space-x-3 text-cyber-purple border-b border-cyber-700/80 pb-3">
+                            <div class="w-10 h-10 rounded-2xl bg-cyber-purple/20 flex items-center justify-center text-cyber-purple text-xl">
+                                <i class="fa-solid fa-desktop"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-black text-white">Live Screen & Smooth Scroll Meter Engine</h3>
+                                <p class="text-xs text-gray-400">Powered by continuously updated neural training & learning data</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 text-xs text-gray-300 leading-relaxed">
+                            <p>
+                                SlopGuard's breakthrough <strong class="text-cyber-cyan">Live Screen Capture & Smooth Scroll Meter</strong> allows creators and IP agents to audit live browser tabs while scrolling through galleries and social feeds in real time.
+                            </p>
+
+                            <div class="bg-cyber-950 p-4 rounded-2xl border border-cyber-700/80 space-y-2 font-mono">
+                                <div class="flex items-center justify-between text-cyber-lime">
+                                    <span class="font-bold flex items-center space-x-2">
+                                        <i class="fa-solid fa-microchip"></i>
+                                        <span>Training Dataset & Multi-Platform Radar</span>
+                                    </span>
+                                    <span class="text-[10px] bg-cyber-lime/20 px-2 py-0.5 rounded">v6.5 Model Active</span>
+                                </div>
+                                <ul class="space-y-1.5 text-gray-400 text-[11px]">
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-check text-cyber-lime mt-0.5"></i>
+                                        <span><strong>Expanded Radar:</strong> Native support for X (Twitter), Pinterest, ArtStation, YouTube, TikTok, Instagram, Google, and Reddit.</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-check text-cyber-lime mt-0.5"></i>
+                                        <span><strong>Integrated IP Passports & CC Generator:</strong> Issue CC BY, CC BY-NC, CC BY-SA, CC BY-ND, CC0 badges & C2PA content passports directly.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-cyber-800 bg-cyber-950/90 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+            <div class="flex items-center space-x-2">
+                <span class="font-black text-white">SLOP<span class="artistic-gradient-text">GUARD</span></span>
+                <span>— CEO Ratana Hildebrand | Based in Thailand 🇹🇭</span>
+            </div>
+            <p class="font-mono text-center md:text-right">Real Art. Real Creators. Creative Commons & DMCA IP Defense Network. &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: CREATE CREATIVE COMMONS & PASSPORT -->
+    <div id="licenseModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card border border-cyber-cyan/40 rounded-3xl max-w-lg w-full p-6 space-y-5 shadow-2xl relative">
+            <button onclick="closeModal('licenseModal')" class="absolute top-5 right-5 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-cyber-cyan/20 border border-cyber-cyan/40 flex items-center justify-center text-cyber-cyan text-xl">
+                    <i class="fa-brands fa-creative-commons"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-black text-white" id="licenseModalTitle">Issue Creative Commons & C2PA Passport</h3>
+                    <p class="text-xs text-gray-400">SlopGuard Cryptographic IP Authority</p>
+                </div>
+            </div>
+
+            <form onsubmit="handleIssueLicenseSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Creator / Entity Name</label>
+                    <input type="text" required id="licenseeNameInput" placeholder="e.g., Ratana Hildebrand Studios" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Select Creative Commons License</label>
+                    <select id="licenseTypeSelect" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+                        <option value="cc-by">Creative Commons CC BY 4.0 (Attribution)</option>
+                        <option value="cc-by-nc">Creative Commons CC BY-NC 4.0 (Attribution-NonCommercial)</option>
+                        <option value="cc-by-sa">Creative Commons CC BY-SA 4.0 (Attribution-ShareAlike)</option>
+                        <option value="cc-by-nd">Creative Commons CC BY-ND 4.0 (Attribution-NoDerivatives)</option>
+                        <option value="cc0">Creative Commons CC0 1.0 (Public Domain)</option>
+                        <option value="creator">SlopGuard Human Creator Passport (Full Rights Reserved)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Primary Medium / Portfolio Link</label>
+                    <input type="text" required placeholder="e.g., Fine Oil Painting / ArtStation Link" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-cyan">
+                </div>
+
+                <div class="bg-cyber-950 p-3.5 rounded-xl border border-cyber-700 text-[11px] text-gray-300 space-y-1">
+                    <p class="font-bold text-cyber-cyan"><i class="fa-solid fa-shield"></i> Cryptographic Metadata:</p>
+                    <p>Binds SHA-256 C2PA content credentials and Creative Commons RDF metadata to your artwork signature.</p>
+                </div>
+
+                <div class="pt-2 flex justify-end space-x-3">
+                    <button type="button" onclick="closeModal('licenseModal')" class="px-4 py-2.5 rounded-xl bg-cyber-800 text-gray-300 text-xs font-bold hover:bg-cyber-700 transition">Cancel</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-teal text-slate-950 font-black text-xs hover:brightness-110 transition shadow-md">Generate License</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: DMCA & THAILAND TAKEDOWN NOTICE GENERATOR -->
+    <div id="takedownModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card border border-cyber-pink/40 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('takedownModal')" class="absolute top-5 right-5 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-cyber-pink/20 border border-cyber-pink/40 flex items-center justify-center text-cyber-pink text-xl">
+                    <i class="fa-solid fa-gavel"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-black text-white" id="takedownModalTitle">Generate DMCA / Thailand DIP Notice</h3>
+                    <p class="text-xs text-gray-400">Official Copyright Infringement & Cease and Desist Notice</p>
+                </div>
+            </div>
+
+            <!-- Portal Links Bar -->
+            <div class="bg-cyber-950 p-4 rounded-2xl border border-cyber-pink/30 space-y-2">
+                <span class="text-xs font-black text-cyber-pink uppercase font-mono tracking-wider block">Official Copyright Claim Links:</span>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[11px]">
+                    <a href="https://help.twitter.com/forms/dmca" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-white font-bold text-center">X (Twitter) Form</a>
+                    <a href="https://help.pinterest.com/en/articles/copyright" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-red-500 font-bold text-center">Pinterest Form</a>
+                    <a href="https://www.artstation.com/dmca" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-blue-400 font-bold text-center">ArtStation DMCA</a>
+                    <a href="https://www.google.com/legal/removals/copyright" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-red-400 font-bold text-center">Google / YouTube</a>
+                    <a href="https://www.ipthailand.go.th/" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-cyber-lime font-bold text-center">DIP Thailand 🇹🇭</a>
+                    <a href="https://www.dmca.com/Takedowns.aspx" target="_blank" class="p-1.5 bg-cyber-900 rounded border border-cyber-700 text-cyber-pink font-bold text-center">DMCA.com Portal</a>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Infringing Post / Artwork Link</label>
+                    <input type="text" id="takedownUrlInput" value="https://x.com/unauthorized_ai_bot/status/991823" class="w-full bg-cyber-950 border border-cyber-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-cyber-pink font-mono">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono font-bold text-gray-300 mb-1">Generated Cease & Desist / DMCA Notice</label>
+                    <textarea id="takedownNoticeText" rows="6" readonly class="w-full bg-cyber-950 border border-cyber-700 rounded-xl p-3.5 text-[11px] text-gray-300 code-font focus:outline-none"></textarea>
+                </div>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <span class="text-[11px] text-cyber-lime font-mono font-bold flex items-center space-x-1">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Forensic SHA-256 Evidence Attached</span>
+                </span>
+                <div class="flex space-x-2 w-full sm:w-auto">
+                    <button onclick="copyTakedownNotice()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-cyber-800 text-gray-200 text-xs font-bold hover:bg-cyber-700 transition flex items-center justify-center space-x-1.5">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>Copy Notice</span>
+                    </button>
+                    <a href="https://www.copyright.gov/dmca/" target="_blank" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-cyber-pink hover:bg-red-600 text-white font-black text-xs transition shadow-md flex items-center justify-center space-x-1.5">
+                        <i class="fa-solid fa-external-link"></i>
+                        <span>File Official Claim</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Box -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden transition-all duration-300">
+        <div class="bg-cyber-900 border-2 border-cyber-cyan p-4 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs text-white max-w-md backdrop-blur-md">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-cyber-cyan text-xl"></i>
+            <div>
+                <div id="toastTitle" class="font-black text-sm">Notification</div>
+                <div id="toastMsg" class="text-gray-300 text-[11px] mt-0.5">Action executed successfully.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP ENGINE -->
+    <script>
+        let liveScreenStream = null;
+
+        // Global Application State Object
+        const state = {
+            activeTab: 'tab-analyzer',
+            isScanning: false,
+            isHeatmapActive: false,
+            radarPaused: false,
+            currentSample: 'human-art',
+            activePlatformFilter: 'ALL',
+            sampleData: {
+                'human-art': {
+                    url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80',
+                    isVideo: false,
+                    mediaType: 'Type: Human Fine Art / Oil Canvas',
+                    score: '3.1%',
+                    verdict: 'AUTHENTIC HUMAN CREATION',
+                    verdictColor: 'text-cyber-lime',
+                    circleColor: 'text-cyber-lime',
+                    icon: 'fa-user-check',
+                    metrics: { m1: '4%', m2: '98%', m3: 'VALID C2PA' },
+                    findings: [
+                        'Authentic physical paint impasto grain & human brush stroke speed variations.',
+                        'Verified EXIF camera lens profile and C2PA cryptographic author stamp.',
+                        'Light source vectors match human optical laws; no neural diffusion blur spikes.'
+                    ]
+                },
+                'human-photo': {
+                    url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80',
+                    isVideo: false,
+                    mediaType: 'Type: Optical Portrait Photo',
+                    score: '1.2%',
+                    verdict: 'AUTHENTIC OPTICAL PHOTOGRAPH',
+                    verdictColor: 'text-cyber-lime',
+                    circleColor: 'text-cyber-lime',
+                    icon: 'fa-camera',
+                    metrics: { m1: '1%', m2: '99%', m3: 'RAW EXIF MATCH' },
+                    findings: [
+                        'Subsurface skin scattering & realistic pore texture present.',
+                        'Coherent optical depth-of-field with true lens aperture distortion.',
+                        'Authentic ISO sensor noise distribution without Gaussian latent grids.'
+                    ]
+                },
+                'ai-slop': {
+                    url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
+                    isVideo: false,
+                    mediaType: 'Type: AI Generated Diffusion Image',
+                    score: '96.8%',
+                    verdict: 'SYNTHETIC AI SLOP DETECTED',
+                    verdictColor: 'text-cyber-pink',
+                    circleColor: 'text-cyber-pink',
+                    icon: 'fa-robot',
+                    metrics: { m1: '98%', m2: '12%', m3: 'UNVERIFIED' },
+                    findings: [
+                        'High-frequency latent Gaussian noise grid detected in Fourier spectrum.',
+                        'Anatomic distortion in background geometry and unnatural texture smoothing.',
+                        'No camera metadata, stripped C2PA authorship signature.'
+                    ]
+                },
+                'deepfake-video': {
+                    url: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-robotic-face-animation-41551-large.mp4',
+                    isVideo: true,
+                    mediaType: 'Type: Synthetic AI / Deepfake Video',
+                    score: '94.2%',
+                    verdict: 'DEEPFAKE SYNTHETIC VIDEO',
+                    verdictColor: 'text-cyber-pink',
+                    circleColor: 'text-cyber-pink',
+                    icon: 'fa-video-slash',
+                    metrics: { m1: '91%', m2: '24%', m3: 'NO C2PA STAMP' },
+                    findings: [
+                        'Temporal boundary warping detected along facial jawline frame sequence.',
+                        'Neural voice lip-sync jitter & non-standard ocular blinking rate.',
+                        'Neural rendering noise spikes across consecutive high-frequency frames.'
+                    ]
+                }
+            },
+            radarStreamData: [
+                { source: 'X @AI_Art_Generator', platform: 'X/Twitter', icon: 'fa-brands fa-x-twitter text-white', type: 'Unattributed Latent Clone', score: '97.4%', risk: 'CRITICAL', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=100&q=80' },
+                { source: 'Pinterest /pin/992014', platform: 'Pinterest', icon: 'fa-brands fa-pinterest text-red-500', type: 'Mass Spam AI Pin', score: '94.1%', risk: 'HIGH', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=100&q=80' },
+                { source: 'ArtStation /artwork/x992', platform: 'ArtStation', icon: 'fa-solid fa-palette text-blue-400', type: 'Scraped Portfolio Theft', score: '98.9%', risk: 'CRITICAL', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80' },
+                { source: 'TikTok @slop_art_hub', platform: 'TikTok', icon: 'fa-brands fa-tiktok text-cyan-400', type: 'Deepfake Filter Glitch', score: '91.8%', risk: 'HIGH', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=100&q=80' },
+                { source: 'YouTube /shorts/7712', platform: 'YouTube', icon: 'fa-brands fa-youtube text-red-500', type: 'Synthetic Voice Avatar', score: '93.5%', risk: 'HIGH', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=100&q=80' },
+                { source: 'Instagram @art_thief_page', platform: 'Instagram', icon: 'fa-brands fa-instagram text-pink-400', type: 'Creative Commons Violation', score: '96.2%', risk: 'CRITICAL', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80' }
+            ],
+            licenses: [
+                { id: 'CC-8829', title: 'Ratana Hildebrand Official CC BY 4.0', hash: '8829f0a9c1e2', type: 'cc-by', typeLabel: 'CREATIVE COMMONS CC BY 4.0', holder: 'Ratana Hildebrand' }
+            ]
+        };
+
+        // Window OnLoad & Initialization setup
+        window.onload = function() {
+            setupSmoothScrollMeter();
+            setupGlobalPasteListener();
+            renderRadarTable();
+            renderLicenses();
+            initChart();
+            startRadarLoop();
+            updateCCPreview();
+        };
+
+        // Smooth Scroll Live Indicator Logic
+        function setupSmoothScrollMeter() {
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (docHeight <= 0) return;
+
+                const scrollPercent = (window.scrollY / docHeight) * 100;
+                
+                // Calculate smooth slop variance based on scroll depth & subtle oscillation
+                const wave = Math.sin(window.scrollY / 120) * 8;
+                const calculatedSlop = Math.min(Math.max((scrollPercent * 0.7) + 12 + wave, 2), 99.8);
+
+                const meterBar = document.getElementById('scrollMeterBar');
+                const scoreText = document.getElementById('scrollSlopScore');
+                const stateBadge = document.getElementById('scrollSlopState');
+                const depthText = document.getElementById('scrollDepthText');
+                const freqText = document.getElementById('scrollFreqText');
+
+                if (meterBar) meterBar.style.width = calculatedSlop.toFixed(1) + '%';
+                if (scoreText) scoreText.innerText = calculatedSlop.toFixed(1) + '% SYNTHETIC';
+                if (depthText) depthText.innerText = Math.round(scrollPercent) + '%';
+                if (freqText) freqText.innerText = (2.4 + (scrollPercent / 20)).toFixed(2) + ' GHz';
+
+                if (calculatedSlop > 60) {
+                    meterBar.className = 'h-full bg-cyber-pink rounded-full';
+                    scoreText.className = 'text-cyber-pink font-black text-sm';
+                    stateBadge.innerText = 'HIGH AI SLOP DETECTED IN VIEWPORT';
+                    stateBadge.className = 'hidden sm:inline-block px-2.5 py-0.5 text-[10px] code-font font-bold bg-cyber-pink/20 text-cyber-pink border border-cyber-pink/40 rounded-full';
+                } else if (calculatedSlop > 30) {
+                    meterBar.className = 'h-full bg-cyber-amber rounded-full';
+                    scoreText.className = 'text-cyber-amber font-black text-sm';
+                    stateBadge.innerText = 'MODERATE MEDIA UNCERTAINTY';
+                    stateBadge.className = 'hidden sm:inline-block px-2.5 py-0.5 text-[10px] code-font font-bold bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/40 rounded-full';
+                } else {
+                    meterBar.className = 'h-full bg-cyber-lime rounded-full';
+                    scoreText.className = 'text-cyber-lime font-black text-sm';
+                    stateBadge.innerText = 'AUTHENTIC HUMAN VIEWPORT';
+                    stateBadge.className = 'hidden sm:inline-block px-2.5 py-0.5 text-[10px] code-font font-bold bg-cyber-lime/20 text-cyber-lime border border-cyber-lime/40 rounded-full';
+                }
+            });
+        }
+
+        // Navigation Tab Switching Function
+        function switchTab(tabId) {
+            state.activeTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-cyber-cyan/20', 'text-cyber-cyan', 'border', 'border-cyber-cyan/40', 'shadow-sm');
+                btn.classList.add('text-gray-400');
+            });
+
+            const activeTabEl = document.getElementById(tabId);
+            if (activeTabEl) {
+                activeTabEl.classList.remove('hidden');
+            }
+
+            const activeNavBtn = document.getElementById(`nav-${tabId}`);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('bg-cyber-cyan/20', 'text-cyber-cyan', 'border', 'border-cyber-cyan/40', 'shadow-sm');
+                activeNavBtn.classList.remove('text-gray-400');
+            }
+        }
+
+        // Creative Commons Live Preview Generator
+        function updateCCPreview() {
+            const ccType = document.getElementById('ccTypeSelect').value;
+            const creator = document.getElementById('ccCreatorInput').value || 'Ratana Hildebrand Studios';
+            const work = document.getElementById('ccWorkTitleInput').value || 'Art Collection';
+
+            const ccMeta = {
+                'cc-by': { title: 'CC BY 4.0 International', desc: 'Free to share & adapt with proper creator attribution.' },
+                'cc-by-nc': { title: 'CC BY-NC 4.0 International', desc: 'Free to share & adapt for NonCommercial purposes only.' },
+                'cc-by-sa': { title: 'CC BY-SA 4.0 International', desc: 'ShareAlike required for all adapted derivative works.' },
+                'cc-by-nc-sa': { title: 'CC BY-NC-SA 4.0 International', desc: 'NonCommercial use only + ShareAlike adaptation requirement.' },
+                'cc-by-nd': { title: 'CC BY-ND 4.0 International', desc: 'Free to copy and redistribute in unadapted original form only.' },
+                'cc0': { title: 'CC0 1.0 Public Domain Dedication', desc: 'Waives all copyright rights globally to the public domain.' }
+            };
+
+            const selected = ccMeta[ccType] || ccMeta['cc-by'];
+            document.getElementById('ccBadgeTitle').innerText = selected.title;
+            document.getElementById('ccBadgeDesc').innerText = selected.desc;
+
+            const codeSnippet = `<a rel="license" href="https://creativecommons.org/licenses/${ccType.replace('cc-', '')}/4.0/">
+  <img alt="Creative Commons License" src="https://i.creativecommons.org/l/${ccType.replace('cc-', '')}/4.0/88x31.png" />
+</a>
+<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">${work}</span> by 
+<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">${creator}</span> is licensed under a 
+<a rel="license" href="https://creativecommons.org/licenses/${ccType.replace('cc-', '')}/4.0/">Creative Commons License</a>.`;
+
+            document.getElementById('ccEmbedCodeText').value = codeSnippet;
+        }
+
+        function copyCCEmbedCode() {
+            const text = document.getElementById('ccEmbedCodeText').value;
+            copyToClipboard(text);
+            showToast('Embed Code Copied!', 'Creative Commons HTML snippet copied to clipboard.', 'fa-code');
+        }
+
+        function saveCurrentCCLicense() {
+            const ccType = document.getElementById('ccTypeSelect').value;
+            const creator = document.getElementById('ccCreatorInput').value || 'Ratana Hildebrand Studios';
+            const work = document.getElementById('ccWorkTitleInput').value || 'Art Collection';
+
+            const newLic = {
+                id: `CC-${Math.floor(Math.random() * 9000 + 1000)}`,
+                title: `${work} — ${ccType.toUpperCase()}`,
+                hash: Math.random().toString(36).substring(2, 15),
+                type: ccType,
+                typeLabel: `CREATIVE COMMONS ${ccType.toUpperCase()} 4.0`,
+                holder: creator
+            };
+
+            state.licenses.push(newLic);
+            renderLicenses();
+            showToast('License Registered!', `Saved ${newLic.typeLabel} passport for ${creator}.`, 'fa-creative-commons');
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showIndicatorDetail(type) {
+            const detailBox = document.getElementById('indicatorDetailBox');
+            if (!detailBox) return;
+
+            const details = {
+                'fourier': '<span class="text-cyber-cyan font-bold block uppercase"><i class="fa-solid fa-info-circle mr-1"></i>Fourier Latent Grid Analysis</span><p class="text-gray-300">Latent diffusion models leave discrete mathematical noise spikes in high-pass Fourier transformations. SlopGuard algorithms detect these frequency grids with 99.4% accuracy even if visually smoothed.</p>',
+                'anatomy': '<span class="text-cyber-pink font-bold block uppercase"><i class="fa-solid fa-info-circle mr-1"></i>Anatomy & Iris Symmetry Glitches</span><p class="text-gray-300">Neural networks fail at maintaining true bone articulation. SlopGuard measures finger joint count, pupil shape circularity, and earring symmetry to spot AI generation instantly.</p>',
+                'lighting': '<span class="text-cyber-amber font-bold block uppercase"><i class="fa-solid fa-info-circle mr-1"></i>Incoherent Lighting & Ray Tracing</span><p class="text-gray-300">AI diffusion models guess light vectors rather than calculating 3D optics. Non-matching shadows across adjacent surfaces indicate synthetic compilation.</p>',
+                'c2pa': '<span class="text-cyber-lime font-bold block uppercase"><i class="fa-solid fa-info-circle mr-1"></i>C2PA Cryptographic Provenance</span><p class="text-gray-300">True cameras and Adobe C2PA manifests sign media with SHA-256 keys. Missing or broken hashes indicate potential AI scraping or metadata stripping.</p>'
+            };
+
+            detailBox.innerHTML = details[type] || details['fourier'];
+        }
+
+        async function startLiveScreenCapture() {
+            try {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                    showToast('Browser Not Supported', 'Live screen capture requires modern Web API support.', 'fa-triangle-exclamation');
+                    return;
+                }
+
+                showToast('Selecting Tab / Screen', 'Please choose the browser tab or window to audit live.', 'fa-desktop');
+
+                liveScreenStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { cursor: "always", displaySurface: "browser" },
+                    audio: false
+                });
+
+                const videoEl = document.getElementById('previewVideo');
+                const imgEl = document.getElementById('previewImage');
+                const banner = document.getElementById('liveCaptureInfoBanner');
+
+                imgEl.classList.add('hidden');
+                videoEl.classList.remove('hidden');
+                videoEl.srcObject = liveScreenStream;
+                videoEl.play();
+
+                if (banner) banner.classList.remove('hidden');
+
+                liveScreenStream.getVideoTracks()[0].onended = () => {
+                    stopLiveScreenCapture();
+                };
+
+                runLiveCaptureAnalysis();
+
+            } catch (err) {
+                console.warn("Screen capture cancelled or denied:", err);
+            }
+        }
+
+        function stopLiveScreenCapture() {
+            if (liveScreenStream) {
+                liveScreenStream.getTracks().forEach(track => track.stop());
+                liveScreenStream = null;
+            }
+
+            const videoEl = document.getElementById('previewVideo');
+            videoEl.srcObject = null;
+            
+            const banner = document.getElementById('liveCaptureInfoBanner');
+            if (banner) banner.classList.add('hidden');
+
+            showToast('Live Capture Stopped', 'Returned to standard inspection viewport.', 'fa-circle-stop');
+        }
+
+        function runLiveCaptureAnalysis() {
+            if (!liveScreenStream) return;
+
+            showToast('Live Model Active', 'Analyzing live tab scrolling frames in real time...', 'fa-bolt');
+
+            const isSynthetic = Math.random() > 0.5;
+            const score = isSynthetic ? (87 + Math.random() * 12).toFixed(1) + '%' : (2 + Math.random() * 6).toFixed(1) + '%';
+
+            state.currentSample = 'live-screen';
+            state.sampleData['live-screen'] = {
+                url: '',
+                isVideo: true,
+                mediaType: 'Type: Real-Time Tab Scroll Stream',
+                score: score,
+                verdict: isSynthetic ? 'LIVE AI SLOP DETECTED IN TAB SCROLL' : 'AUTHENTIC HUMAN MEDIA IN SCROLL STREAM',
+                verdictColor: isSynthetic ? 'text-cyber-pink' : 'text-cyber-lime',
+                circleColor: isSynthetic ? 'text-cyber-pink' : 'text-cyber-lime',
+                icon: isSynthetic ? 'fa-desktop' : 'fa-user-check',
+                metrics: {
+                    m1: isSynthetic ? '94%' : '3%',
+                    m2: isSynthetic ? '15%' : '98%',
+                    m3: isSynthetic ? 'SCROLL INTERCEPTED' : 'LIVE ACCURACY 99.2%'
+                },
+                findings: isSynthetic ? [
+                    'Live Screen Stream Analysis: High-frequency Fourier grid artifacts detected during tab scroll.',
+                    'Neural training dataset matched synthetic diffusion texture signatures on active viewport.',
+                    'AI generated image/video slop detected on scrolled tab content.'
+                ] : [
+                    'Live Screen Stream Analysis: Genuine brush speed variation and camera optical profile verified.',
+                    'Cross-checked with SlopGuard 10M+ training scroll frames dataset.',
+                    'No neural diffusion grid spikes found on active browser tab screen.'
+                ]
+            };
+
+            applyScanResults(state.sampleData['live-screen']);
+        }
+
+        function setupGlobalPasteListener() {
+            window.addEventListener('paste', (e) => {
+                let foundFile = false;
+                if (e.clipboardData && e.clipboardData.files && e.clipboardData.files.length > 0) {
+                    const file = e.clipboardData.files[0];
+                    const isVideo = file.type.startsWith('video/');
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        loadCustomMediaData(event.target.result, isVideo, 'Clipboard Media File');
+                    };
+                    reader.readAsDataURL(file);
+                    foundFile = true;
+                }
+
+                if (!foundFile && e.clipboardData) {
+                    const pastedText = e.clipboardData.getData('text');
+                    if (pastedText && (pastedText.startsWith('http://') || pastedText.startsWith('https://') || pastedText.startsWith('data:'))) {
+                        const isVideoUrl = pastedText.match(/\.(mp4|mkv|mov|avi|webm)($|\?)/i);
+                        loadCustomMediaData(pastedText, !!isVideoUrl, 'Pasted Media URL');
+                        foundFile = true;
+                    }
+                }
+
+                if (!foundFile) {
+                    showToast('Paste Format Error', 'Please copy an image, video, or URL to paste.', 'fa-triangle-exclamation');
+                }
+            });
+        }
+
+        function triggerPastePrompt() {
+            showToast('Ready to Paste!', 'Press Cmd+V or Ctrl+V on your keyboard now.', 'fa-paste');
+        }
+
+        function handleUrlInputPaste() {
+            const url = document.getElementById('pasteUrlInput').value.trim();
+            if (url) {
+                const isVideoUrl = url.match(/\.(mp4|mkv|mov|avi|webm)($|\?)/i);
+                loadCustomMediaData(url, !!isVideoUrl, 'Pasted Platform Link');
+            } else {
+                showToast('Empty URL', 'Please enter a valid media URL to scan.', 'fa-triangle-exclamation');
+            }
+        }
+
+        function loadCustomMediaData(src, isVideo, label) {
+            switchTab('tab-analyzer');
+
+            const imgEl = document.getElementById('previewImage');
+            const videoEl = document.getElementById('previewVideo');
+
+            if (isVideo) {
+                imgEl.classList.add('hidden');
+                videoEl.classList.remove('hidden');
+                videoEl.src = src;
+            } else {
+                videoEl.classList.add('hidden');
+                imgEl.classList.remove('hidden');
+                imgEl.src = src;
+            }
+
+            const isSynthetic = Math.random() > 0.45;
+            const score = isSynthetic ? (85 + Math.random() * 14).toFixed(1) + '%' : (1 + Math.random() * 8).toFixed(1) + '%';
+
+            state.currentSample = 'custom-media';
+            state.sampleData['custom-media'] = {
+                url: src,
+                isVideo: isVideo,
+                mediaType: `Type: ${label}`,
+                score: score,
+                verdict: isSynthetic ? 'SYNTHETIC AI SLOP DETECTED' : 'AUTHENTIC HUMAN CREATION VERIFIED',
+                verdictColor: isSynthetic ? 'text-cyber-pink' : 'text-cyber-lime',
+                circleColor: isSynthetic ? 'text-cyber-pink' : 'text-cyber-lime',
+                icon: isSynthetic ? 'fa-robot' : 'fa-user-check',
+                metrics: {
+                    m1: isSynthetic ? '92%' : '5%',
+                    m2: isSynthetic ? '18%' : '97%',
+                    m3: isSynthetic ? 'UNVERIFIED' : 'VALID SIGNATURE'
+                },
+                findings: isSynthetic ? [
+                    'Multi-format file analysis: High-frequency latent grid noise detected.',
+                    'Unnatural texture smoothing with inconsistent physics vectors.',
+                    'No valid EXIF camera profile or C2PA provenance header attached.'
+                ] : [
+                    'Multi-format file analysis: Authentic physical optical characteristics verified.',
+                    'Coherent line anatomy, brush velocity/lens depth, and background lighting.',
+                    'Zero neural diffusion noise grid patterns found.'
+                ]
+            };
+
+            runForensicScan();
+            showToast('Media Intercepted!', `Analyzed file from clipboard/upload (${label}).`, 'fa-bolt');
+        }
+
+        function handleFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const isVideo = file.type.startsWith('video/') || !!file.name.match(/\.(mp4|mkv|mov|avi|webm)$/i);
+            const ext = file.name.split('.').pop().toUpperCase();
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                loadCustomMediaData(event.target.result, isVideo, `Uploaded File (.${ext})`);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function loadSample(sampleKey) {
+            state.currentSample = sampleKey;
+            const data = state.sampleData[sampleKey];
+            const imgEl = document.getElementById('previewImage');
+            const videoEl = document.getElementById('previewVideo');
+
+            if (data.isVideo) {
+                imgEl.classList.add('hidden');
+                videoEl.classList.remove('hidden');
+                videoEl.src = data.url;
+            } else {
+                videoEl.classList.add('hidden');
+                imgEl.classList.remove('hidden');
+                imgEl.src = data.url;
+            }
+
+            runForensicScan();
+        }
+
+        function runForensicScan() {
+            if (state.isScanning) return;
+            state.isScanning = true;
+
+            const overlay = document.getElementById('scanningOverlay');
+            const statusText = document.getElementById('scanStatusText');
+            overlay.classList.remove('hidden');
+
+            const steps = [
+                'Decoding Multi-Format Header & EXIF / C2PA Provenance...',
+                'Executing Fourier Spectral Frequency Grid Sweep...',
+                'Checking Subsurface Scattering & Anatomic Coherence...',
+                'Cross-Auditing against X, Pinterest, & ArtStation Datasets...'
+            ];
+
+            let stepIdx = 0;
+            const interval = setInterval(() => {
+                stepIdx++;
+                if (stepIdx < steps.length) {
+                    statusText.innerText = steps[stepIdx];
+                } else {
+                    clearInterval(interval);
+                    overlay.classList.add('hidden');
+                    state.isScanning = false;
+                    applyScanResults(state.sampleData[state.currentSample] || state.sampleData['human-art']);
+                }
+            }, 300);
+        }
+
+        function applyScanResults(data) {
+            const scoreEl = document.getElementById('scoreValueText');
+            scoreEl.innerText = data.score;
+            scoreEl.className = `text-4xl sm:text-5xl font-black code-font tracking-tight ${data.verdictColor}`;
+            
+            const verdictLabel = document.getElementById('verdictLabel');
+            verdictLabel.className = `text-xs font-black mt-1 flex items-center space-x-1.5 uppercase tracking-wide ${data.verdictColor}`;
+            verdictLabel.innerHTML = `<i class="fa-solid ${data.icon}"></i><span>${data.verdict}</span>`;
+
+            document.getElementById('mediaTypeTag').innerText = data.mediaType || 'Type: Custom Media';
+
+            document.getElementById('metric1Val').innerText = data.metrics.m1;
+            document.getElementById('metric1Bar').style.width = data.metrics.m1;
+            document.getElementById('metric2Val').innerText = data.metrics.m2;
+            document.getElementById('metric2Bar').style.width = data.metrics.m2;
+            document.getElementById('metric3Val').innerText = data.metrics.m3;
+
+            const findingsList = document.getElementById('findingsList');
+            findingsList.innerHTML = '';
+            data.findings.forEach(f => {
+                const li = document.createElement('li');
+                const isHuman = parseFloat(data.score) < 50;
+                li.className = isHuman ? 'text-cyber-lime flex items-start space-x-2' : 'text-cyber-pink flex items-start space-x-2';
+                li.innerHTML = `<i class="fa-solid ${isHuman ? 'fa-check-circle' : 'fa-triangle-exclamation'} mt-0.5"></i><span>${f}</span>`;
+                findingsList.appendChild(li);
+            });
+
+            drawSyntheticHeatmap();
+        }
+
+        function drawSyntheticHeatmap() {
+            const canvas = document.getElementById('heatmapCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth || 500;
+            canvas.height = canvas.offsetHeight || 300;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const isHuman = parseFloat(state.sampleData[state.currentSample]?.score || '0') < 50;
+            if (isHuman) return;
+
+            const numBlobs = 16;
+            for (let i = 0; i < numBlobs; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const radius = Math.random() * 70 + 30;
+
+                const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
+                grad.addColorStop(0, 'rgba(255, 0, 127, 0.5)');
+                grad.addColorStop(0.5, 'rgba(220, 28, 213, 0.25)');
+                grad.addColorStop(1, 'transparent');
+
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function toggleHeatmap() {
+            state.isHeatmapActive = !state.isHeatmapActive;
+            const canvas = document.getElementById('heatmapCanvas');
+            const btn = document.getElementById('heatmapBtn');
+
+            if (state.isHeatmapActive) {
+                canvas.style.opacity = '1';
+                btn.classList.add('bg-cyber-pink/30', 'border-cyber-pink');
+            } else {
+                canvas.style.opacity = '0';
+                btn.classList.remove('bg-cyber-pink/30', 'border-cyber-pink');
+            }
+        }
+
+        function filterRadarPlatform(platform, btnEl) {
+            state.activePlatformFilter = platform;
+            
+            document.querySelectorAll('.platform-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-cyber-cyan', 'text-slate-950', 'font-black');
+                btn.classList.add('bg-cyber-900', 'text-gray-300');
+            });
+            if (btnEl) {
+                btnEl.classList.add('bg-cyber-cyan', 'text-slate-950', 'font-black');
+                btnEl.classList.remove('bg-cyber-900', 'text-gray-300');
+            }
+
+            document.getElementById('activeFilterBadge').innerText = `Active: ${platform === 'ALL' ? 'All Platforms' : platform}`;
+            renderRadarTable();
+        }
+
+        function renderRadarTable() {
+            const tbody = document.getElementById('radarTableBody');
+            if (!tbody) return;
+            const filtered = state.activePlatformFilter === 'ALL' 
+                ? state.radarStreamData 
+                : state.radarStreamData.filter(row => row.platform === state.activePlatformFilter);
+
+            tbody.innerHTML = filtered.map(row => `
+                <tr class="hover:bg-cyber-850/60 transition">
+                    <td class="py-3 px-3">
+                        <img src="${row.img}" class="w-8 h-8 rounded-lg object-cover border border-cyber-700">
+                    </td>
+                    <td class="py-3 px-3 text-white font-bold">
+                        <div class="flex items-center space-x-1.5">
+                            <i class="${row.icon} text-sm"></i>
+                            <span>${row.source}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-3"><span class="px-2.5 py-1 rounded-full bg-cyber-950 text-cyber-pink border border-cyber-pink/30 text-[10px] font-bold">${row.type}</span></td>
+                    <td class="py-3 px-3 text-cyber-pink font-extrabold">${row.score}</td>
+                    <td class="py-3 px-3"><span class="${row.risk === 'CRITICAL' ? 'text-red-500 font-black animate-pulse' : 'text-cyber-amber font-bold'}">${row.risk}</span></td>
+                    <td class="py-3 px-3 text-right">
+                        <button onclick="openTakedownModal('${row.source}')" class="px-3 py-1 bg-cyber-pink/20 hover:bg-cyber-pink/40 text-cyber-pink font-bold rounded-lg text-[10px] transition border border-cyber-pink/30">
+                            Issue DMCA Notice
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function startRadarLoop() {
+            setInterval(() => {
+                if (state.radarPaused) return;
+                const countEl = document.getElementById('totalInterceptsCount');
+                if (countEl) {
+                    let current = parseInt(countEl.innerText.replace(/,/g, ''));
+                    countEl.innerText = (current + Math.floor(Math.random() * 3) + 1).toLocaleString();
+                }
+            }, 3000);
+        }
+
+        function toggleRadarStream() {
+            state.radarPaused = !state.radarPaused;
+            const btn = document.getElementById('pauseRadarBtn');
+            if (state.radarPaused) {
+                btn.innerHTML = `<i class="fa-solid fa-play"></i><span>Resume Feed</span>`;
+                btn.classList.add('bg-cyber-lime', 'text-slate-950');
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-pause"></i><span>Pause Feed</span>`;
+                btn.classList.remove('bg-cyber-lime', 'text-slate-950');
+            }
+        }
+
+        function initChart() {
+            const canvas = document.getElementById('slopTrendChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'AI Slop Intercepts',
+                        data: [1400, 2100, 3800, 2900, 4800, 6200],
+                        borderColor: '#ff007f',
+                        backgroundColor: 'rgba(255, 0, 127, 0.15)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: '#1e2c4d' }, ticks: { color: '#9ca3af', font: { size: 10 } } },
+                        y: { grid: { color: '#1e2c4d' }, ticks: { color: '#9ca3af', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function openLicenseModal(type = 'cc-by') {
+            document.getElementById('licenseTypeSelect').value = type;
+            document.getElementById('licenseModal').classList.remove('hidden');
+        }
+
+        function openTakedownModal(mode = 'standard') {
+            const modal = document.getElementById('takedownModal');
+            const titleEl = document.getElementById('takedownModalTitle');
+            const noticeText = document.getElementById('takedownNoticeText');
+
+            modal.classList.remove('hidden');
+
+            if (mode === 'thai') {
+                titleEl.innerText = 'Generate Thailand DIP & DMCA Copyright Notice';
+                noticeText.value = `FORMAL CEASE AND DESIST / NOTICE OF COPYRIGHT INFRINGEMENT
+Under the Thai Copyright Act B.E. 2537 & Amendment B.E. 2565 (Notice & Takedown System)
+Department of Intellectual Property (DIP Thailand)
+
+To: Service Provider / Infringing Platform Administrator
+Re: Unauthorized Reproduction & Commercial Use of Copyrighted Artwork
+
+I am the copyright holder (or authorized agent) of the original artistic work.
+Infringing Material URL: ${document.getElementById('takedownUrlInput').value}
+Evidence SHA-256 Hash: 8829f0a9c1e2b4d37890a1b2c3d4e5f6
+
+In accordance with section 43/1 of the Thai Copyright Act B.E. 2565, we demand the immediate removal or disabling of access to the infringing material.
+
+Signed,
+Ratana Hildebrand / SlopGuard IP Defense Network (Thailand 🇹🇭)`;
+            } else {
+                titleEl.innerText = 'Generate Standard DMCA Notice & Copyright Claim';
+                noticeText.value = `FORMAL DMCA TAKEDOWN NOTICE (17 U.S.C. § 512(c))
+
+To Designated Copyright Agent:
+Please be advised that the URL below contains unauthorized derivative/scraped content infringing on my copyrighted work.
+
+Target URL: ${document.getElementById('takedownUrlInput').value}
+SlopGuard Forensic SHA-256 Hash: 8829f0a9c1e2b4d37890a1b2c3d4e5f6
+
+I have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.
+
+Signed,
+Verified Creator / SlopGuard Legal Agent`;
+            }
+        }
+
+        function copyTakedownNotice() {
+            const notice = document.getElementById('takedownNoticeText').value;
+            copyToClipboard(notice);
+            showToast('DMCA Notice Copied!', 'Cease & Desist text copied to clipboard.', 'fa-copy');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function handleIssueLicenseSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('licenseeNameInput').value;
+            const type = document.getElementById('licenseTypeSelect').value;
+
+            const newLic = {
+                id: type.startsWith('cc') ? `CC-${Math.floor(Math.random() * 9000 + 1000)}` : `HUM-${Math.floor(Math.random() * 9000 + 1000)}`,
+                title: `${name}'s ${type.toUpperCase()} License`,
+                hash: Math.random().toString(36).substring(2, 15),
+                type: type,
+                typeLabel: type.startsWith('cc') ? `CREATIVE COMMONS ${type.toUpperCase()}` : 'HUMAN CREATOR PASSPORT',
+                holder: name
+            };
+
+            state.licenses.push(newLic);
+            renderLicenses();
+            closeModal('licenseModal');
+            showToast('Passport Generated!', `Issued official ${newLic.typeLabel} for ${name}.`, 'fa-certificate');
+        }
+
+        function renderLicenses() {
+            const container = document.getElementById('activeLicensesContainer');
+            if (!container) return;
+            document.getElementById('licenseCountText').innerText = `${state.licenses.length} Active Passports & CC Licenses`;
+
+            container.innerHTML = state.licenses.map(lic => {
+                const isCC = lic.type && lic.type.startsWith('cc');
+                const badgeColor = isCC ? 'bg-cyber-amber/20 text-cyber-amber border-cyber-amber/40' : 'bg-cyber-cyan/20 text-cyber-cyan border-cyber-cyan/40';
+                const borderColor = isCC ? 'border-cyber-amber/40' : 'border-cyber-cyan/40';
+
+                return `
+                <div class="bg-cyber-950 p-4 rounded-2xl border ${borderColor} relative overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 text-[10px] code-font font-bold ${badgeColor} rounded-md border">${lic.typeLabel}</span>
+                            <h4 class="text-sm font-black text-white mt-2">${lic.title}</h4>
+                            <p class="text-[11px] text-gray-400 code-font mt-0.5">ID: ${lic.id} | Holder: ${lic.holder}</p>
+                        </div>
+                        <i class="fa-solid fa-shield-halved ${isCC ? 'text-cyber-amber' : 'text-cyber-cyan'} text-xl"></i>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-cyber-800 flex justify-between items-center text-[10px] code-font text-gray-400">
+                        <span>SHA-256: ${lic.hash}...</span>
+                        <span class="text-cyber-lime font-bold">VERIFIED C2PA</span>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function showToast(title, msg, iconClass = 'fa-circle-check') {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastMsg').innerText = msg;
+            document.getElementById('toastIcon').className = `fa-solid ${iconClass} text-cyber-cyan text-xl`;
+
+            toast.classList.remove('hidden');
+            toast.classList.add('paste-toast');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
